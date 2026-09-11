@@ -1,0 +1,135 @@
+/* Small hand written stylesheet - no CSS framework, to keep things beginner friendly. */
+
+:root {
+  --bg: #0f1420;
+  --panel: #171e2e;
+  --text: #e8ecf5;
+  --muted: #9aa6bf;
+  --line: #263149;
+  --good: #4ade80;
+  --average: #fbbf24;
+  --poor: #f87171;
+  --accent: #4f8cff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+.site-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { color: var(--text); font-weight: 700; text-decoration: none; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 32px 24px 64px; }
+
+h1 { margin: 0 0 8px; font-size: 30px; }
+h2 { font-size: 19px; margin: 0 0 12px; }
+h3 { font-size: 16px; margin: 0 0 6px; }
+
+.lead, .hint, .meta { color: var(--muted); }
+.hint { font-size: 14px; }
+
+.scan-form { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 10px; }
+
+.scan-form input {
+  flex: 1 1 320px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+}
+
+.scan-form select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+}
+
+.scan-form button {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.alert {
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid var(--poor);
+  color: var(--poor);
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.scanned-url { word-break: break-all; color: var(--accent); }
+.verdict { margin-top: 10px; }
+
+.scores { display: flex; gap: 14px; flex-wrap: wrap; margin: 24px 0; }
+
+.score-card {
+  flex: 1 1 150px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+}
+
+.score-value { display: block; font-size: 34px; font-weight: 700; }
+.score-name { color: var(--muted); font-size: 13px; }
+
+.score-card.good .score-value { color: var(--good); }
+.score-card.average .score-value { color: var(--average); }
+.score-card.poor .score-value { color: var(--poor); }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+
+table { width: 100%; border-collapse: collapse; }
+td { padding: 8px 0; border-bottom: 1px solid var(--line); }
+td.value { text-align: right; font-variant-numeric: tabular-nums; }
+td.good { color: var(--good); }
+td.average { color: var(--average); }
+td.poor { color: var(--poor); }
+
+.issue {
+  border-left: 3px solid var(--line);
+  padding: 12px 0 12px 14px;
+  margin-top: 14px;
+}
+
+.issue.poor { border-left-color: var(--poor); }
+.issue.average { border-left-color: var(--average); }
+
+.impact { color: var(--average); font-size: 14px; margin: 0 0 6px; }
+.detail { color: var(--muted); font-size: 14px; }
+.fix { font-size: 14px; }
+
+.back { color: var(--accent); }
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 18px 24px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
