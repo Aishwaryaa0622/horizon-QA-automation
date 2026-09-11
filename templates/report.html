@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Report - {{ report.url }}{% endblock %}
+
+{% block content %}
+<section class="report-head">
+  <h1>Report</h1>
+  <p class="scanned-url">{{ report.url }}</p>
+  <p class="meta">{{ report.strategy|capitalize }} &middot; {{ report.fetched_at }}</p>
+  <p class="verdict">{{ report.verdict }}</p>
+</section>
+
+<!-- Category scores out of 100 -->
+<section class="scores">
+  {% for name, value in report.scores.items() %}
+  <div class="score-card {{ 'good' if value >= 90 else 'average' if value >= 50 else 'poor' }}">
+    <span class="score-value">{{ value }}</span>
+    <span class="score-name">{{ name }}</span>
+  </div>
+  {% endfor %}
+</section>
+
+<!-- Core Web Vitals / lab metrics -->
+<section class="panel">
+  <h2>Key metrics</h2>
+  <table>
+    <tbody>
+      {% for metric in report.metrics %}
+      <tr>
+        <td>{{ metric.name }}</td>
+        <td class="value {{ metric.status }}">{{ metric.value }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<!-- Failed audits plus our fix recommendations -->
+<section class="panel">
+  <h2>Fix recommendations ({{ report.issues|length }})</h2>
+  <p class="hint">{{ report.passed_count }} audits already pass. Sorted by biggest time saving.</p>
+
+  {% if not report.issues %}
+  <p>No failing audits were found. Nice work!</p>
+  {% endif %}
+
+  {% for issue in report.issues %}
+  <article class="issue {{ issue.status }}">
+    <h3>{{ issue.title }}</h3>
+    {% if issue.impact %}<p class="impact">{{ issue.impact }}</p>{% endif %}
+    <p class="detail">{{ issue.detail }}</p>
+    <p class="fix"><strong>How to fix:</strong> {{ issue.fix }}</p>
+  </article>
+  {% endfor %}
+</section>
+
+<p><a class="back" href="{{ url_for('home') }}">Scan another page</a></p>
+{% endblock %}
